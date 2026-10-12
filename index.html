@@ -1,689 +1,418 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NetBusiness.cz | Odhalte, co brzdí růst vašeho businessu</title>
-    <meta name="description" content="NetBusiness.cz — prémiové B2B poradenství pro české firmy. Pomáháme majitelům a ředitelům firem najít skrytý potenciál a nastavit konkrétní kroky ke změně." />
-    <meta name="color-scheme" content="dark light" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest" defer></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        base: '#0A0A0F',
-                        light: '#F5F0EB',
-                        accent: '#FF4D00',
-                        lime: '#C8F000',
-                        card: '#141420',
-                        muted: '#888880',
-                        textlight: '#E8E8E0',
-                    },
-                    fontFamily: {
-                        syne: ['Syne', 'sans-serif'],
-                        inter: ['Inter', 'sans-serif'],
-                    },
-                },
-            },
-        };
-    </script>
-    <style>
-        :root {
-            --c-base: #0A0A0F;
-            --c-light: #F5F0EB;
-            --c-accent: #FF4D00;
-            --c-lime: #C8F000;
-            --c-card: #141420;
-            --c-muted: #888880;
-            --c-textlight: #E8E8E0;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rozcestník – Lextrace LLC</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Inter', sans-serif; color: #E8E8E0; background: var(--c-base); overflow-x: hidden; }
+    :root {
+      --bg:      #141414;
+      --surface: #1c1c1c;
+      --border:  #2a2a2a;
+      --text:    #e8e8e8;
+      --muted:   #888;
+      --accent:  #5b9cf6;
+      --font:    "Segoe UI", system-ui, -apple-system, sans-serif;
+    }
 
-        /* Scroll reveal */
-        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(.22,1,.36,1), transform 0.8s cubic-bezier(.22,1,.36,1); }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
+    html { scroll-behavior: smooth; }
 
-        /* Step animation */
-        .step-reveal { opacity: 0; transform: translateX(60px); transition: opacity 0.7s cubic-bezier(.22,1,.36,1), transform 0.7s cubic-bezier(.22,1,.36,1); }
-        .step-reveal.visible { opacity: 1; transform: translateX(0); }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
 
-        /* Hero word animation */
-        .hero-word { opacity: 0; transform: translateY(30px); display: inline-block; }
-        .hero-word.animate { opacity: 1; transform: translateY(0); transition: opacity 0.6s cubic-bezier(.22,1,.36,1), transform 0.6s cubic-bezier(.22,1,.36,1); }
+    /* ── NAV ── */
+    nav {
+      background: rgba(20, 20, 20, 0.92);
+      border-bottom: 1px solid var(--border);
+    }
 
-        /* Counter animation */
-        .counter-num { font-variant-numeric: tabular-nums; }
+    .nav-inner {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-        /* Nav transition */
-        .nav-fixed { transition: background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease; }
-        .nav-scrolled { background: rgba(10,10,15,0.85) !important; backdrop-filter: blur(20px) !important; -webkit-backdrop-filter: blur(20px) !important; box-shadow: 0 1px 0 rgba(255,77,0,0.15); }
+    .nav-logo {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: .01em;
+    }
 
-        /* Floating badge pulse */
-        @keyframes pulse-dot { 0%,100%{box-shadow:0 0 0 0 rgba(200,240,0,0.5);} 50%{box-shadow:0 0 0 8px rgba(200,240,0,0);} }
-        .pulse-dot { animation: pulse-dot 2s infinite; }
+    .nav-logo span { color: var(--accent); }
 
-        /* Bounce arrow */
-        @keyframes bounce-down { 0%,100%{transform:translateY(0)} 50%{transform:translateY(10px)} }
-        .bounce-arrow { animation: bounce-down 2s ease-in-out infinite; }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
 
-        /* Rotating shape */
-        @keyframes slow-rotate { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
-        .slow-spin { animation: slow-rotate 20s linear infinite; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .875rem;
+      transition: color .15s;
+    }
 
-        /* Service card glow */
-        .service-card { transition: transform 0.4s cubic-bezier(.22,1,.36,1), box-shadow 0.4s ease; }
-        .service-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(255,77,0,0.15); }
+    .nav-links a:hover { color: var(--text); }
 
-        /* Differentiator card */
-        .diff-card { transition: transform 0.35s ease, box-shadow 0.35s ease; }
-        .diff-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+    /* ── LAYOUT ── */
+    main {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
 
-        /* Form focus */
-        .form-input { transition: border-color 0.3s ease, box-shadow 0.3s ease; }
-        .form-input:focus { border-color: var(--c-accent) !important; box-shadow: 0 0 0 3px rgba(255,77,0,0.15); outline: none; }
+    /* ── HEADER ── */
+    .page-header { margin-bottom: 2.5rem; }
 
-        /* Active nav */
-        .nav-link { position: relative; }
-        .nav-link::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:2px; background:var(--c-accent); transition:width 0.3s ease; }
-        .nav-link.active::after { width:100%; }
+    .page-label {
+      display: inline-block;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: .75rem;
+    }
 
-        /* Diagonal overlay */
-        .hero-grid {
-            background-image: linear-gradient(135deg, rgba(255,255,255,0.02) 25%, transparent 25%),
-                              linear-gradient(225deg, rgba(255,255,255,0.02) 25%, transparent 25%),
-                              linear-gradient(45deg, rgba(255,255,255,0.015) 25%, transparent 25%);
-            background-size: 60px 60px;
-        }
+    h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -.02em;
+      margin-bottom: .5rem;
+    }
 
-        /* Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--c-base); }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--c-accent); }
+    .page-subtitle {
+      color: var(--muted);
+      font-size: .95rem;
+    }
 
-        /* Highlighted card */
-        .card-highlighted { border: 1.5px solid var(--c-accent) !important; position: relative; }
-        .card-highlighted::before { content: 'Nejoblíbenější'; position: absolute; top: -12px; left: 24px; background: var(--c-accent); color: #fff; font-size: 11px; font-weight: 600; padding: 3px 12px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
-    </style>
+    /* ── TOC ── */
+    .toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .toc-title {
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .toc ol {
+      padding-left: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: .35rem;
+    }
+
+    .toc a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: .9rem;
+      transition: opacity .15s;
+    }
+
+    .toc a:hover { opacity: .75; text-decoration: underline; }
+
+    /* ── HR ── */
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* ── SECTIONS ── */
+    section { scroll-margin-top: 72px; }
+
+    .section-num {
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: .4rem;
+    }
+
+    h2 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: .6rem;
+      letter-spacing: -.01em;
+    }
+
+    .section-body {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .section-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      margin-top: .75rem;
+      color: var(--accent);
+      font-size: .875rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity .15s;
+    }
+
+    .section-link:hover { opacity: .75; text-decoration: underline; }
+    .section-link::after { content: "↗"; font-size: .8rem; }
+
+    .section-link.empty {
+      opacity: .35;
+      pointer-events: none;
+      cursor: default;
+    }
+    .section-link.empty::after { content: ""; }
+
+    /* ── CONTACT BLOCK ── */
+    .contact-block {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: .3rem;
+    }
+
+    .contact-label {
+      font-size: .8rem;
+      color: var(--muted);
+      margin-top: .5rem;
+    }
+
+    .contact-label:first-child { margin-top: 0; }
+
+    .contact-mail {
+      color: var(--accent);
+      font-size: .9rem;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .contact-mail:hover { text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      margin-top: 4rem;
+    }
+
+    .footer-inner {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 2rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .footer-copy { font-size: .8rem; color: var(--muted); }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: .5rem;
+      font-size: .8rem;
+      color: var(--muted);
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .15s;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    .footer-sep { color: var(--border); user-select: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      h1 { font-size: 1.5rem; }
+      .nav-inner { padding: 0 1rem; }
+      main { padding: 3rem 1rem; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
 </head>
-<body data-id="0" class="font-inter">
-    <app-icon data-id="1" hidden data-icon="trending-up" data-palette="Red"></app-icon>
+<body>
 
-    <!-- FIXED NAVIGATION -->
-    <nav data-id="2" id="navbar-a7x2" class="nav-fixed fixed top-0 left-0 w-full z-50 bg-transparent">
-        <div data-id="3" class="max-w-7xl mx-auto flex items-center justify-between px-5 md:px-8 py-4 md:py-5">
-            <a data-id="4" href="#hero-section" id="logo-nav-k3m1" class="font-syne font-800 text-xl md:text-2xl text-white tracking-tight select-none">
-                Net<span data-id="5" class="text-accent">.</span>Business
-            </a>
-            <div data-id="6" class="hidden md:flex items-center gap-8">
-                <a data-id="7" href="#sluzby-section" class="nav-link text-sm text-textlight hover:text-white transition-colors" data-nav="sluzby-section">Služby</a>
-                <a data-id="8" href="#pristup-section" class="nav-link text-sm text-textlight hover:text-white transition-colors" data-nav="pristup-section">Přístup</a>
-                <a data-id="9" href="#vysledky-section" class="nav-link text-sm text-textlight hover:text-white transition-colors" data-nav="vysledky-section">Výsledky</a>
-                <a data-id="10" href="#kontakt-section" class="nav-link text-sm text-textlight hover:text-white transition-colors" data-nav="kontakt-section">Kontakt</a>
-                <a data-id="11" href="#kontakt-section" id="cta-nav-btn-d4k9" class="bg-accent hover:bg-orange-600 text-white text-sm font-semibold px-6 py-2.5 rounded-full transition-all duration-300">Domluvit schůzku</a>
-            </div>
-            <button data-id="12" id="mobile-menu-btn-r8w3" class="md:hidden p-2 text-white" aria-label="Otevřít menu">
-                <i data-id="13" data-lucide="menu" class="w-6 h-6"></i>
-            </button>
-        </div>
+  <!-- NAV -->
+  <nav aria-label="Hlavní navigace">
+    <div class="nav-inner">
+      <a href="rozcestnik.html" class="nav-logo">Lextrace<span> LLC</span></a>
+      <ul class="nav-links">
+        <li><a href="rozcestnik.html">Rozcestník</a></li>
+        <li><a href="impressum.html">Impressum</a></li>
+        <li><a href="#kontakty">Kontakt</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- Page header -->
+    <header class="page-header">
+      <span class="page-label">Lextrace LLC</span>
+      <h1>Rozcestník</h1>
+      <p class="page-subtitle">
+        Přehled právních dokumentů a informací společnosti Lextrace LLC.
+      </p>
+    </header>
+
+    <!-- TOC -->
+    <nav class="toc" aria-label="Obsah stránky">
+      <p class="toc-title">Obsah</p>
+      <ol>
+        <li><a href="impressum.html">Impressum</a></li>
+        <li><a href="#podminky-pouziti">Podmínky použití</a></li>
+        <li><a href="#prohlaseni-ochrana">Prohlášení o ochraně osobních údajů</a></li>
+        <li><a href="#zasady-ochrany">Zásady ochrany osobních údajů</a></li>
+        <li><a href="#souhlas-zpracovani">Souhlas se zpracováním osobních údajů</a></li>
+        <li><a href="#licencni-ujednani">Licenční ujednání</a></li>
+        <li><a href="#obchodni-podminky">Obchodní podmínky</a></li>
+        <li><a href="#prohlaseni-pristupnost">Prohlášení o přístupnosti</a></li>
+        <li><a href="#prohlaseni-cookies">Prohlášení o cookies</a></li>
+        <li><a href="#kontakty">Kontakty</a></li>
+      </ol>
     </nav>
 
-    <!-- MOBILE MENU -->
-    <div data-id="14" id="mobile-menu-x9p2" class="hidden fixed inset-0 bg-base z-[60] flex flex-col">
-        <div data-id="15" class="flex items-center justify-between px-5 py-4">
-            <span data-id="16" class="font-syne font-800 text-xl text-white">Net<span data-id="17" class="text-accent">.</span>Business</span>
-            <button data-id="18" id="mobile-menu-close-f2k8" class="p-2 text-white" aria-label="Zavřít menu">
-                <i data-id="19" data-lucide="x" class="w-6 h-6"></i>
-            </button>
-        </div>
-        <div data-id="20" class="flex flex-col items-center justify-center flex-1 gap-8">
-            <a data-id="21" href="#sluzby-section" class="mobile-nav-link text-2xl font-syne font-700 text-white hover:text-accent transition-colors">Služby</a>
-            <a data-id="22" href="#pristup-section" class="mobile-nav-link text-2xl font-syne font-700 text-white hover:text-accent transition-colors">Přístup</a>
-            <a data-id="23" href="#vysledky-section" class="mobile-nav-link text-2xl font-syne font-700 text-white hover:text-accent transition-colors">Výsledky</a>
-            <a data-id="24" href="#kontakt-section" class="mobile-nav-link text-2xl font-syne font-700 text-white hover:text-accent transition-colors">Kontakt</a>
-            <a data-id="25" href="#kontakt-section" class="mobile-nav-link bg-accent text-white text-lg font-semibold px-8 py-3 rounded-full mt-4">Domluvit schůzku</a>
-        </div>
+    <!-- 1 -->
+    <section id="podminky-pouziti">
+      <p class="section-num">01</p>
+      <h2>Podmínky použití</h2>
+      <p class="section-body">Dokument vymezuje pravidla a podmínky užívání služeb a webových stránek společnosti Lextrace LLC.</p>
+      <a href="#" class="section-link empty" aria-disabled="true">Přečíst dokument</a>
+    </section>
+
+    <hr />
+
+    <!-- 2 -->
+    <section id="prohlaseni-ochrana">
+      <p class="section-num">02</p>
+      <h2>Prohlášení o ochraně osobních údajů</h2>
+      <p class="section-body">Informace o tom, jakým způsobem společnost Lextrace LLC přistupuje k ochraně osobních údajů uživatelů.</p>
+      <a href="#" class="section-link empty" aria-disabled="true">Přečíst dokument</a>
+    </section>
+
+    <hr />
+
+    <!-- 3 -->
+    <section id="zasady-ochrany">
+      <p class="section-num">03</p>
+      <h2>Zásady ochrany osobních údajů</h2>
+      <p class="section-body">Podrobný popis zásad zpracování, uchovávání a sdílení osobních údajů v souladu s platnou legislativou.</p>
+      <a href="https://lextrace-online.github.io/ochrana-osobnich-udaju/" class="section-link" target="_blank" rel="noopener noreferrer">Přečíst dokument</a>
+    </section>
+
+    <hr />
+
+    <!-- 4 -->
+    <section id="souhlas-zpracovani">
+      <p class="section-num">04</p>
+      <h2>Souhlas se zpracováním osobních údajů</h2>
+      <p class="section-body">Formulář a podmínky souhlasu uživatele se zpracováním osobních údajů společností Lextrace LLC.</p>
+      <a href="https://lextrace-online.github.io/souhlas_se_zpracovanim/" class="section-link" target="_blank" rel="noopener noreferrer">Přečíst dokument</a>
+    </section>
+
+    <hr />
+
+    <!-- 5 -->
+    <section id="licencni-ujednani">
+      <p class="section-num">05</p>
+      <h2>Licenční ujednání</h2>
+      <p class="section-body">Podmínky licence k používání softwaru, obsahu a dalších duševních vlastnictví společnosti Lextrace LLC.</p>
+      <a href="#" class="section-link empty" aria-disabled="true">Přečíst dokument</a>
+    </section>
+
+    <hr />
+
+    <!-- 6 -->
+    <section id="obchodni-podminky">
+      <p class="section-num">06</p>
+      <h2>Obchodní podmínky</h2>
+      <p class="section-body">Smluvní podmínky upravující obchodní vztah mezi společností Lextrace LLC a jejími zákazníky.</p>
+      <a href="#" class="section-link empty" aria-disabled="true">Přečíst dokument</a>
+    </section>
+
+    <hr />
+
+    <!-- 7 -->
+    <section id="prohlaseni-pristupnost">
+      <p class="section-num">07</p>
+      <h2>Prohlášení o přístupnosti</h2>
+      <p class="section-body">Informace o úrovni přístupnosti webových stránek a digitálních služeb Lextrace LLC pro osoby se specifickými potřebami.</p>
+      <a href="#" class="section-link empty" aria-disabled="true">Přečíst dokument</a>
+    </section>
+
+    <hr />
+
+    <!-- 8 -->
+    <section id="prohlaseni-cookies">
+      <p class="section-num">08</p>
+      <h2>Prohlášení o cookies</h2>
+      <p class="section-body">Přehled typů souborů cookies používaných na stránkách Lextrace LLC a způsoby jejich správy.</p>
+      <a href="#" class="section-link empty" aria-disabled="true">Přečíst dokument</a>
+    </section>
+
+    <hr />
+
+    <!-- 9 -->
+    <section id="kontakty">
+      <p class="section-num">09</p>
+      <h2>Kontakty</h2>
+      <p class="section-body">Kontaktní údaje společnosti Lextrace LLC pro dotazy, podněty nebo uplatnění práv subjektů údajů.</p>
+      <div class="contact-block">
+        <span class="contact-label">Obecný dotaz</span>
+        <a href="mailto:info@lextrace.eu" class="contact-mail">info@lextrace.eu</a>
+        <span class="contact-label">Právní záležitosti &amp; GDPR</span>
+        <a href="mailto:legal@lextrace.eu" class="contact-mail">legal@lextrace.eu</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-copy">&copy; 2026 Lextrace LLC. Všechna práva vyhrazena.</span>
+      <div class="footer-links">
+        <a href="https://lextrace-online.github.io/souhlas_se_zpracovanim/" target="_blank" rel="noopener noreferrer">Souhlas se zpracováním osobních údajů</a>
+        <span class="footer-sep">·</span>
+        <a href="https://lextrace-online.github.io/ochrana-osobnich-udaju/" target="_blank" rel="noopener noreferrer">Ochrana osobních údajů</a>
+        <span class="footer-sep">·</span>
+        <a href="#">Cookies prohlášení</a>
+      </div>
     </div>
+  </footer>
 
-    <main data-id="26">
-        <!-- HERO SECTION -->
-        <section data-id="27" id="hero-section" class="relative min-h-screen flex flex-col justify-center bg-base overflow-hidden hero-grid">
-            <!-- Decorative geometric shape -->
-            <div data-id="28" class="absolute -top-20 -right-20 md:-top-32 md:-right-32 w-[300px] h-[300px] md:w-[500px] md:h-[500px] slow-spin opacity-20 pointer-events-none" aria-hidden="true">
-                <svg data-id="29" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <polygon data-id="30" points="250,30 470,170 400,430 100,430 30,170" stroke="#C8F000" stroke-width="2" fill="none"/>
-                    <polygon data-id="31" points="250,80 420,190 370,400 130,400 80,190" stroke="#C8F000" stroke-width="1" fill="none" opacity="0.5"/>
-                    <circle data-id="32" cx="250" cy="250" r="120" stroke="#C8F000" stroke-width="1" fill="none" opacity="0.3"/>
-                </svg>
-            </div>
-            <!-- Diagonal accent lines -->
-            <div data-id="33" class="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-accent/20 to-transparent" aria-hidden="true"></div>
-
-            <div data-id="34" class="relative max-w-7xl mx-auto px-5 md:px-8 pt-32 md:pt-40 pb-20">
-                <!-- Floating badge -->
-                <div data-id="35" class="inline-flex items-center gap-2 bg-card border border-white/10 rounded-full px-4 py-1.5 mb-8 md:mb-10">
-                    <span data-id="36" class="w-2 h-2 bg-lime rounded-full pulse-dot"></span>
-                    <span data-id="37" class="text-xs font-medium tracking-widest uppercase text-textlight">B2B Konzultace</span>
-                </div>
-
-                <h1 data-id="38" id="hero-heading-m4k7" class="font-syne font-800 leading-[0.95] tracking-tight" style="font-size: clamp(48px, 8vw, 130px);">
-                    <span data-id="39" class="hero-word text-white">Odhalte,</span><br data-id="40" />
-                    <span data-id="41" class="hero-word text-white">co brzdí růst</span><br data-id="42" />
-                    <span data-id="43" class="hero-word text-accent">vašeho businessu.</span>
-                </h1>
-
-                <p data-id="44" id="hero-sub-w3n6" class="mt-6 md:mt-8 text-muted text-base md:text-lg leading-relaxed max-w-xl hero-word">
-                    Pomáháme majitelům a ředitelům firem najít přesně ta místa, kde přicházejí o růst — a nastavit konkrétní kroky ke změně.
-                </p>
-
-                <div data-id="45" class="flex flex-wrap gap-4 mt-8 md:mt-10">
-                    <a data-id="46" href="#problem-section" id="cta-hero1-q5r2" class="hero-word inline-flex items-center gap-2 bg-accent hover:bg-orange-600 text-white font-semibold px-7 py-3.5 rounded-full transition-all duration-300 text-sm md:text-base">
-                        Zjistit více
-                        <i data-id="47" data-lucide="arrow-right" class="w-4 h-4"></i>
-                    </a>
-                    <a data-id="48" href="#sluzby-section" id="cta-hero2-h9m1" class="hero-word inline-flex items-center gap-2 border border-white/30 hover:border-white text-white font-semibold px-7 py-3.5 rounded-full transition-all duration-300 text-sm md:text-base">
-                        Naše služby
-                    </a>
-                </div>
-            </div>
-
-            <!-- Scroll indicator -->
-            <div data-id="49" class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 bounce-arrow">
-                <span data-id="50" class="text-xs text-muted tracking-widest uppercase">Scroll</span>
-                <i data-id="51" data-lucide="chevron-down" class="w-5 h-5 text-muted"></i>
-            </div>
-        </section>
-
-        <!-- PROBLEM STATEMENT SECTION -->
-        <section data-id="52" id="problem-section" class="bg-light py-20 md:py-32">
-            <div data-id="53" class="max-w-7xl mx-auto px-5 md:px-8">
-                <div data-id="54" class="reveal">
-                    <p data-id="55" class="text-xs font-semibold tracking-[0.25em] uppercase text-accent mb-4">Proč řešit růst</p>
-                    <h2 data-id="56" id="problem-title-k8r3" class="font-syne font-800 text-3xl md:text-5xl lg:text-6xl text-base leading-tight">
-                        Proč firmy<br data-id="57"/>přestávají růst?
-                    </h2>
-                    <p data-id="58" class="mt-6 text-base md:text-lg text-base/70 max-w-2xl leading-relaxed">
-                        Většina firem má potenciál růst rychleji. Problém bývá skrytý — v procesech, obchodní strategii nebo v tom, jak firma prezentuje svou hodnotu zákazníkům.
-                    </p>
-                </div>
-
-                <div data-id="59" class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mt-14 md:mt-20">
-                    <div data-id="60" class="reveal text-center md:text-left">
-                        <span data-id="61" class="counter-num font-syne font-800 text-5xl md:text-7xl text-accent" data-target="67" data-suffix="%">0%</span>
-                        <p data-id="62" class="mt-3 text-base font-medium text-base">firem stagnuje bez jasného důvodu</p>
-                    </div>
-                    <div data-id="63" class="reveal text-center md:text-left" style="transition-delay:0.15s">
-                        <span data-id="64" class="counter-num font-syne font-800 text-5xl md:text-7xl text-accent" data-target="3" data-suffix="x">0x</span>
-                        <p data-id="65" class="mt-3 text-base font-medium text-base">rychlejší růst po identifikaci slabých míst</p>
-                    </div>
-                    <div data-id="66" class="reveal text-center md:text-left" style="transition-delay:0.3s">
-                        <span data-id="67" class="counter-num font-syne font-800 text-5xl md:text-7xl text-accent" data-target="92" data-suffix="%">0%</span>
-                        <p data-id="68" class="mt-3 text-base font-medium text-base">klientů doporučuje naše služby</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SERVICES SECTION -->
-        <section data-id="69" id="sluzby-section" class="bg-base py-20 md:py-32">
-            <div data-id="70" class="max-w-7xl mx-auto px-5 md:px-8">
-                <div data-id="71" class="reveal">
-                    <p data-id="72" class="text-xs font-semibold tracking-[0.25em] uppercase text-accent mb-4">Služby</p>
-                    <h2 data-id="73" id="services-title-p2m9" class="font-syne font-800 text-3xl md:text-5xl lg:text-6xl text-white leading-tight">
-                        Co pro vás uděláme
-                    </h2>
-                </div>
-
-                <div data-id="74" class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-12 md:mt-16 relative">
-                    <!-- Connector arrows (desktop only) -->
-                    <div data-id="75" class="hidden md:flex absolute top-1/2 left-[33.33%] -translate-x-1/2 -translate-y-1/2 z-10">
-                        <i data-id="76" data-lucide="chevron-right" class="w-6 h-6 text-accent/40"></i>
-                    </div>
-                    <div data-id="77" class="hidden md:flex absolute top-1/2 left-[66.66%] -translate-x-1/2 -translate-y-1/2 z-10">
-                        <i data-id="78" data-lucide="chevron-right" class="w-6 h-6 text-accent/40"></i>
-                    </div>
-
-                    <!-- Card 1 -->
-                    <div data-id="79" class="reveal service-card bg-card border border-white/5 rounded-2xl p-7 md:p-8">
-                        <div data-id="80" class="w-12 h-12 rounded-xl bg-lime/10 flex items-center justify-center mb-6">
-                            <svg data-id="81" class="w-6 h-6 text-lime" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle data-id="82" cx="11" cy="11" r="8"/><path data-id="83" d="m21 21-4.3-4.3"/></svg>
-                        </div>
-                        <h3 data-id="84" class="font-syne font-700 text-xl text-white mb-3">Diagnostika businessu</h3>
-                        <p data-id="85" class="text-muted text-sm leading-relaxed mb-5">Provedeme hloubkovou analýzu vašeho podnikání a identifikujeme konkrétní bariéry, které brzdí váš růst.</p>
-                        <div data-id="86" class="flex flex-wrap gap-2">
-                            <span data-id="87" class="text-xs bg-white/5 text-textlight px-3 py-1 rounded-full">Analýza</span>
-                            <span data-id="88" class="text-xs bg-white/5 text-textlight px-3 py-1 rounded-full">Audit</span>
-                            <span data-id="89" class="text-xs bg-white/5 text-textlight px-3 py-1 rounded-full">KPI</span>
-                        </div>
-                    </div>
-
-                    <!-- Card 2 (highlighted) -->
-                    <div data-id="90" class="reveal service-card card-highlighted bg-card rounded-2xl p-7 md:p-8" style="transition-delay:0.15s">
-                        <div data-id="91" class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6">
-                            <svg data-id="92" class="w-6 h-6 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle data-id="93" cx="12" cy="12" r="10"/><circle data-id="94" cx="12" cy="12" r="6"/><circle data-id="95" cx="12" cy="12" r="2"/></svg>
-                        </div>
-                        <h3 data-id="96" class="font-syne font-700 text-xl text-white mb-3">Obchodní strategie</h3>
-                        <p data-id="97" class="text-muted text-sm leading-relaxed mb-5">Navrhneme konkrétní obchodní strategii přizpůsobenou vaší firmě, trhu a cílové skupině zákazníků.</p>
-                        <div data-id="98" class="flex flex-wrap gap-2">
-                            <span data-id="99" class="text-xs bg-accent/10 text-accent px-3 py-1 rounded-full">Strategie</span>
-                            <span data-id="100" class="text-xs bg-accent/10 text-accent px-3 py-1 rounded-full">B2B</span>
-                            <span data-id="101" class="text-xs bg-accent/10 text-accent px-3 py-1 rounded-full">Výkon</span>
-                        </div>
-                    </div>
-
-                    <!-- Card 3 -->
-                    <div data-id="102" class="reveal service-card bg-card border border-white/5 rounded-2xl p-7 md:p-8" style="transition-delay:0.3s">
-                        <div data-id="103" class="w-12 h-12 rounded-xl bg-lime/10 flex items-center justify-center mb-6">
-                            <svg data-id="104" class="w-6 h-6 text-lime" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="105" d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path data-id="106" d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path data-id="107" d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path data-id="108" d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
-                        </div>
-                        <h3 data-id="109" class="font-syne font-700 text-xl text-white mb-3">Implementace a výsledky</h3>
-                        <p data-id="110" class="text-muted text-sm leading-relaxed mb-5">Pomůžeme vám zavést doporučená opatření do praxe a pravidelně měříme dosažené výsledky.</p>
-                        <div data-id="111" class="flex flex-wrap gap-2">
-                            <span data-id="112" class="text-xs bg-white/5 text-textlight px-3 py-1 rounded-full">Implementace</span>
-                            <span data-id="113" class="text-xs bg-white/5 text-textlight px-3 py-1 rounded-full">Měření</span>
-                            <span data-id="114" class="text-xs bg-white/5 text-textlight px-3 py-1 rounded-full">ROI</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- OUR APPROACH SECTION -->
-        <section data-id="115" id="pristup-section" class="bg-light py-20 md:py-32">
-            <div data-id="116" class="max-w-7xl mx-auto px-5 md:px-8">
-                <div data-id="117" class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-                    <div data-id="118" class="reveal">
-                        <p data-id="119" class="text-xs font-semibold tracking-[0.25em] uppercase text-accent mb-4">Jak pracujeme</p>
-                        <h2 data-id="120" id="approach-title-n5k8" class="font-syne font-800 text-3xl md:text-5xl lg:text-6xl text-base leading-tight">
-                            Náš přístup
-                        </h2>
-                        <p data-id="121" class="mt-6 text-base md:text-lg text-base/70 max-w-md leading-relaxed">
-                            Nejsme klasická poradenská firma. Přinášíme zkušenosti z reálného podnikání — ne jen teorii.
-                        </p>
-                    </div>
-
-                    <div data-id="122" class="flex flex-col gap-8 md:gap-10">
-                        <div data-id="123" class="step-reveal flex gap-5 md:gap-6 border-l-2 border-accent pl-6 md:pl-8" style="transition-delay:0s">
-                            <span data-id="124" class="font-syne font-800 text-5xl md:text-7xl text-base/10 leading-none select-none shrink-0">01</span>
-                            <div data-id="125">
-                                <h3 data-id="126" class="font-syne font-700 text-lg md:text-xl text-base">Posloucháme</h3>
-                                <p data-id="127" class="mt-2 text-sm md:text-base text-muted leading-relaxed">Nejprve důkladně pochopíme vaše podnikání, tým a trh.</p>
-                            </div>
-                        </div>
-                        <div data-id="128" class="step-reveal flex gap-5 md:gap-6 border-l-2 border-accent pl-6 md:pl-8" style="transition-delay:0.15s">
-                            <span data-id="129" class="font-syne font-800 text-5xl md:text-7xl text-base/10 leading-none select-none shrink-0">02</span>
-                            <div data-id="130">
-                                <h3 data-id="131" class="font-syne font-700 text-lg md:text-xl text-base">Analyzujeme</h3>
-                                <p data-id="132" class="mt-2 text-sm md:text-base text-muted leading-relaxed">Identifikujeme skryté problémy a promarněné příležitosti.</p>
-                            </div>
-                        </div>
-                        <div data-id="133" class="step-reveal flex gap-5 md:gap-6 border-l-2 border-accent pl-6 md:pl-8" style="transition-delay:0.3s">
-                            <span data-id="134" class="font-syne font-800 text-5xl md:text-7xl text-base/10 leading-none select-none shrink-0">03</span>
-                            <div data-id="135">
-                                <h3 data-id="136" class="font-syne font-700 text-lg md:text-xl text-base">Navrhujeme</h3>
-                                <p data-id="137" class="mt-2 text-sm md:text-base text-muted leading-relaxed">Připravíme konkrétní plán opatření s měřitelnými cíli.</p>
-                            </div>
-                        </div>
-                        <div data-id="138" class="step-reveal flex gap-5 md:gap-6 border-l-2 border-accent pl-6 md:pl-8" style="transition-delay:0.45s">
-                            <span data-id="139" class="font-syne font-800 text-5xl md:text-7xl text-base/10 leading-none select-none shrink-0">04</span>
-                            <div data-id="140">
-                                <h3 data-id="141" class="font-syne font-700 text-lg md:text-xl text-base">Realizujeme</h3>
-                                <p data-id="142" class="mt-2 text-sm md:text-base text-muted leading-relaxed">Jsme u vás při zavádění změn a kontrolujeme výsledky.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- TESTIMONIAL SECTION -->
-        <section data-id="143" id="vysledky-section" class="bg-base py-20 md:py-32 relative overflow-hidden">
-            <div data-id="144" class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-lime/20 to-transparent" aria-hidden="true"></div>
-            <div data-id="145" class="max-w-7xl mx-auto px-5 md:px-8">
-                <div data-id="146" class="reveal">
-                    <p data-id="147" class="text-xs font-semibold tracking-[0.25em] uppercase text-accent mb-10 md:mb-16">Co říkají klienti</p>
-                </div>
-                <div data-id="148" class="reveal relative max-w-4xl">
-                    <svg data-id="149" class="absolute -top-4 -left-4 md:-top-6 md:-left-8 w-16 h-16 md:w-24 md:h-24 text-lime opacity-30" viewBox="0 0 24 24" fill="currentColor"><path data-id="150" d="M11.3 2.1C6.1 3.4 2.5 7.2 2.5 12.5c0 3.6 2.2 6.5 5 6.5 2.5 0 4.5-2 4.5-4.5S9.5 10 7 10c-.3 0-.6 0-.9.1C6.6 6.8 8.7 4.6 11.8 3.5l-.5-1.4zm10 0C16.1 3.4 12.5 7.2 12.5 12.5c0 3.6 2.2 6.5 5 6.5 2.5 0 4.5-2 4.5-4.5S19.5 10 17 10c-.3 0-.6 0-.9.1.5-3.3 2.6-5.5 5.7-6.6l-.5-1.4z"/></svg>
-                    <blockquote data-id="151" class="font-syne font-700 text-2xl md:text-4xl lg:text-5xl text-white leading-snug pl-4 md:pl-12">
-                        Za 6 měsíců spolupráce jsme zvýšili obrat o 34 % a konečně víme, kde máme největší příležitosti k růstu.
-                    </blockquote>
-                    <div data-id="152" class="mt-8 pl-4 md:pl-12">
-                        <p data-id="153" class="text-accent font-semibold">— Jan Novák</p>
-                        <p data-id="154" class="text-muted text-sm mt-1">CEO, TechCorp s.r.o.</p>
-                    </div>
-                </div>
-
-                <div data-id="155" class="reveal grid grid-cols-3 gap-4 md:gap-6 mt-16 md:mt-20 max-w-2xl">
-                    <div data-id="156" class="bg-card border border-white/5 rounded-xl px-6 py-5 flex items-center justify-center">
-                        <span data-id="157" class="font-syne font-700 text-sm md:text-base text-white/40 tracking-wider">InnoTech</span>
-                    </div>
-                    <div data-id="158" class="bg-card border border-white/5 rounded-xl px-6 py-5 flex items-center justify-center">
-                        <span data-id="159" class="font-syne font-700 text-sm md:text-base text-white/40 tracking-wider">DataPro</span>
-                    </div>
-                    <div data-id="160" class="bg-card border border-white/5 rounded-xl px-6 py-5 flex items-center justify-center">
-                        <span data-id="161" class="font-syne font-700 text-sm md:text-base text-white/40 tracking-wider">GreenSoft</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- WHY US SECTION -->
-        <section data-id="162" id="whyus-section" class="bg-light py-20 md:py-32">
-            <div data-id="163" class="max-w-7xl mx-auto px-5 md:px-8">
-                <div data-id="164" class="reveal">
-                    <p data-id="165" class="text-xs font-semibold tracking-[0.25em] uppercase text-accent mb-4">Proč právě my</p>
-                    <h2 data-id="166" id="whyus-title-g2h7" class="font-syne font-800 text-3xl md:text-5xl text-base leading-tight mb-12 md:mb-16">
-                        V čem se lišíme
-                    </h2>
-                </div>
-
-                <div data-id="167" class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-                    <div data-id="168" class="reveal diff-card bg-white rounded-2xl p-7 md:p-8">
-                        <div data-id="169" class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-5">
-                            <svg data-id="170" class="w-6 h-6 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle data-id="171" cx="12" cy="12" r="10"/><circle data-id="172" cx="12" cy="12" r="6"/><circle data-id="173" cx="12" cy="12" r="2"/></svg>
-                        </div>
-                        <h3 data-id="174" class="font-syne font-700 text-lg text-base mb-2">Praktické zkušenosti</h3>
-                        <p data-id="175" class="text-muted text-sm leading-relaxed">Naši konzultanti mají za sebou roky v reálném businessu, ne jen akademické znalosti.</p>
-                    </div>
-
-                    <div data-id="176" class="reveal diff-card bg-white rounded-2xl p-7 md:p-8" style="transition-delay:0.1s">
-                        <div data-id="177" class="w-12 h-12 rounded-xl bg-lime/15 flex items-center justify-center mb-5">
-                            <svg data-id="178" class="w-6 h-6 text-lime" style="filter:brightness(0.6)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="179" d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                        </div>
-                        <h3 data-id="180" class="font-syne font-700 text-lg text-base mb-2">Rychlé výsledky</h3>
-                        <p data-id="181" class="text-muted text-sm leading-relaxed">První konkrétní doporučení dostanete již po úvodní diagnostice.</p>
-                    </div>
-
-                    <div data-id="182" class="reveal diff-card bg-white rounded-2xl p-7 md:p-8" style="transition-delay:0.2s">
-                        <div data-id="183" class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-5">
-                            <svg data-id="184" class="w-6 h-6 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="185" d="M3 3v18h18"/><path data-id="186" d="m19 9-5 5-4-4-3 3"/></svg>
-                        </div>
-                        <h3 data-id="187" class="font-syne font-700 text-lg text-base mb-2">Měřitelné výsledky</h3>
-                        <p data-id="188" class="text-muted text-sm leading-relaxed">Každé doporučení má jasné KPI a způsob měření úspěchu.</p>
-                    </div>
-
-                    <div data-id="189" class="reveal diff-card bg-white rounded-2xl p-7 md:p-8" style="transition-delay:0.3s">
-                        <div data-id="190" class="w-12 h-12 rounded-xl bg-lime/15 flex items-center justify-center mb-5">
-                            <svg data-id="191" class="w-6 h-6 text-lime" style="filter:brightness(0.6)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="192" d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle data-id="193" cx="9" cy="7" r="4"/><path data-id="194" d="M22 21v-2a4 4 0 0 0-3-3.87"/><path data-id="195" d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                        </div>
-                        <h3 data-id="196" class="font-syne font-700 text-lg text-base mb-2">Dlouhodobé partnerství</h3>
-                        <p data-id="197" class="text-muted text-sm leading-relaxed">Nejsme jednorázová konzultace — jsme váš obchodní partner.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CONTACT / CTA SECTION -->
-        <section data-id="198" id="kontakt-section" class="bg-base py-20 md:py-32 relative">
-            <div data-id="199" class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-accent/20 to-transparent" aria-hidden="true"></div>
-            <div data-id="200" class="max-w-7xl mx-auto px-5 md:px-8">
-                <div data-id="201" class="reveal text-center mb-12 md:mb-16">
-                    <h2 data-id="202" class="font-syne font-800 text-3xl md:text-5xl lg:text-7xl text-white leading-tight">
-                        Připraveni odhalit
-                    </h2>
-                    <h2 data-id="203" class="font-syne font-800 text-3xl md:text-5xl lg:text-7xl text-accent leading-tight">
-                        skrytý potenciál?
-                    </h2>
-                    <p data-id="204" class="mt-6 text-muted text-base md:text-lg max-w-xl mx-auto">
-                        Začněte bezplatnou konzultací. Zjistíme, kde vaše firma přichází o příležitosti.
-                    </p>
-                </div>
-
-                <div data-id="205" class="reveal grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-12 max-w-5xl mx-auto">
-                    <!-- Form -->
-                    <div data-id="206" class="lg:col-span-3 bg-light rounded-2xl p-6 md:p-8 shadow-2xl" id="form-card-b7k2">
-                        <form data-id="207" id="contact-form-r4t9" class="flex flex-col gap-4">
-                            <div data-id="208">
-                                <label data-id="209" class="block text-xs font-semibold text-base/60 uppercase tracking-wider mb-1.5" for="name-input">Vaše jméno</label>
-                                <input data-id="210" type="text" id="name-input" class="form-input w-full bg-white border border-base/10 rounded-xl px-4 py-3 text-sm text-base placeholder-muted" placeholder="Jan Novák" required />
-                            </div>
-                            <div data-id="211">
-                                <label data-id="212" class="block text-xs font-semibold text-base/60 uppercase tracking-wider mb-1.5" for="company-input">Název firmy</label>
-                                <input data-id="213" type="text" id="company-input" class="form-input w-full bg-white border border-base/10 rounded-xl px-4 py-3 text-sm text-base placeholder-muted" placeholder="Vaše firma s.r.o." required />
-                            </div>
-                            <div data-id="214">
-                                <label data-id="215" class="block text-xs font-semibold text-base/60 uppercase tracking-wider mb-1.5" for="email-input">E-mail</label>
-                                <input data-id="216" type="email" id="email-input" class="form-input w-full bg-white border border-base/10 rounded-xl px-4 py-3 text-sm text-base placeholder-muted" placeholder="jan@firma.cz" required />
-                            </div>
-                            <div data-id="217">
-                                <label data-id="218" class="block text-xs font-semibold text-base/60 uppercase tracking-wider mb-1.5" for="phone-input">Telefon <span data-id="219" class="text-muted font-normal">(nepovinné)</span></label>
-                                <input data-id="220" type="tel" id="phone-input" class="form-input w-full bg-white border border-base/10 rounded-xl px-4 py-3 text-sm text-base placeholder-muted" placeholder="+420 000 000 000" />
-                            </div>
-                            <div data-id="221">
-                                <label data-id="222" class="block text-xs font-semibold text-base/60 uppercase tracking-wider mb-1.5" for="message-input">Popište váš největší obchodní problém</label>
-                                <textarea data-id="223" id="message-input" rows="4" class="form-input w-full bg-white border border-base/10 rounded-xl px-4 py-3 text-sm text-base placeholder-muted resize-none" placeholder="Popište krátce, co ve firmě řešíte..." required></textarea>
-                            </div>
-                            <button data-id="224" type="submit" id="submit-btn-c8n3" class="w-full bg-gradient-to-r from-accent to-orange-600 hover:from-orange-600 hover:to-accent text-white font-semibold py-3.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 text-sm md:text-base mt-2">
-                                Odeslat poptávku
-                                <i data-id="225" data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </button>
-                            <p data-id="226" class="text-xs text-muted text-center mt-1">Odpovídáme do 24 hodin. Bez závazků.</p>
-                        </form>
-                        <!-- Success message -->
-                        <div data-id="227" id="form-success-m5k2" class="hidden flex-col items-center justify-center text-center py-12">
-                            <div data-id="228" class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-5">
-                                <i data-id="229" data-lucide="check" class="w-8 h-8 text-green-600"></i>
-                            </div>
-                            <h3 data-id="230" class="font-syne font-700 text-xl text-base mb-2">Děkujeme!</h3>
-                            <p data-id="231" class="text-muted text-sm">Ozveme se vám do 24 hodin.</p>
-                        </div>
-                    </div>
-
-                    <!-- Contact info -->
-                    <div data-id="232" class="lg:col-span-2 flex flex-col justify-center gap-8">
-                        <div data-id="233" class="flex items-start gap-4">
-                            <div data-id="234" class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
-                                <i data-id="235" data-lucide="mail" class="w-5 h-5 text-accent"></i>
-                            </div>
-                            <div data-id="236">
-                                <p data-id="237" class="text-xs text-muted uppercase tracking-wider mb-1">E-mail</p>
-                                <p data-id="238" class="text-white font-medium text-sm">info@netbusiness.cz</p>
-                            </div>
-                        </div>
-                        <div data-id="239" class="flex items-start gap-4">
-                            <div data-id="240" class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
-                                <i data-id="241" data-lucide="phone" class="w-5 h-5 text-accent"></i>
-                            </div>
-                            <div data-id="242">
-                                <p data-id="243" class="text-xs text-muted uppercase tracking-wider mb-1">Telefon</p>
-                                <p data-id="244" class="text-white font-medium text-sm">+420 000 000 000</p>
-                            </div>
-                        </div>
-                        <div data-id="245" class="flex items-start gap-4">
-                            <div data-id="246" class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
-                                <i data-id="247" data-lucide="map-pin" class="w-5 h-5 text-accent"></i>
-                            </div>
-                            <div data-id="248">
-                                <p data-id="249" class="text-xs text-muted uppercase tracking-wider mb-1">Adresa</p>
-                                <p data-id="250" class="text-white font-medium text-sm">Praha, Česká republika</p>
-                            </div>
-                        </div>
-                        <div data-id="251" class="mt-4 pt-6 border-t border-white/10">
-                            <p data-id="252" class="text-muted text-xs uppercase tracking-wider mb-3">Sledujte nás</p>
-                            <a data-id="253" href="#" class="inline-flex items-center gap-2 text-white hover:text-accent transition-colors text-sm">
-                                <i data-id="254" data-lucide="linkedin" class="w-5 h-5"></i>
-                                LinkedIn
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- FOOTER -->
-    <footer data-id="255" class="bg-base border-t border-accent/20 py-8 md:py-10">
-        <div data-id="256" class="max-w-7xl mx-auto px-5 md:px-8">
-            <div data-id="257" class="flex flex-col md:flex-row items-center justify-between gap-6">
-                <div data-id="258" class="text-center md:text-left">
-                    <span data-id="259" class="font-syne font-800 text-lg text-white">Net<span data-id="260" class="text-accent">.</span>Business</span>
-                    <p data-id="261" class="text-muted text-xs mt-1">Odhalujeme skrytý potenciál firem.</p>
-                </div>
-                <div data-id="262" class="flex flex-wrap items-center justify-center gap-6 text-sm text-muted">
-                    <a data-id="263" href="#sluzby-section" class="hover:text-white transition-colors">Služby</a>
-                    <a data-id="264" href="#pristup-section" class="hover:text-white transition-colors">Přístup</a>
-                    <a data-id="265" href="#vysledky-section" class="hover:text-white transition-colors">Výsledky</a>
-                    <a data-id="266" href="#kontakt-section" class="hover:text-white transition-colors">Kontakt</a>
-                </div>
-                <div data-id="267" class="flex items-center gap-4 text-muted text-xs">
-                    <a data-id="268" href="#" class="hover:text-accent transition-colors"><i data-id="269" data-lucide="linkedin" class="w-4 h-4"></i></a>
-                    <span data-id="270">© 2026 NetBusiness.cz</span>
-                </div>
-            </div>
-            <p data-id="271" class="text-center text-muted/50 text-xs mt-6">Made by Copilot</p>
-        </div>
-    </footer>
-
-    <script>
-        // === Lucide Icons (progressive enhancement) ===
-        if (typeof lucide !== "undefined" && typeof lucide.createIcons === "function") {
-            lucide.createIcons();
-        }
-
-        // === Mobile Menu ===
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn-r8w3');
-        const mobileMenu = document.getElementById('mobile-menu-x9p2');
-        const mobileMenuClose = document.getElementById('mobile-menu-close-f2k8');
-
-        if (mobileMenuBtn && mobileMenu && mobileMenuClose) {
-            mobileMenuBtn.addEventListener('click', function() {
-                mobileMenu.classList.remove('hidden');
-                mobileMenu.classList.add('flex');
-                document.body.style.overflow = 'hidden';
-            });
-
-            mobileMenuClose.addEventListener('click', function() {
-                mobileMenu.classList.add('hidden');
-                mobileMenu.classList.remove('flex');
-                document.body.style.overflow = '';
-            });
-
-            document.querySelectorAll('.mobile-nav-link').forEach(function(link) {
-                link.addEventListener('click', function() {
-                    mobileMenu.classList.add('hidden');
-                    mobileMenu.classList.remove('flex');
-                    document.body.style.overflow = '';
-                });
-            });
-        }
-
-        // === Navbar scroll effect ===
-        const navbar = document.getElementById('navbar-a7x2');
-        let lastScrollY = 0;
-
-        window.addEventListener('scroll', function() {
-            const scrollY = window.scrollY;
-            if (scrollY > 60) {
-                navbar.classList.add('nav-scrolled');
-            } else {
-                navbar.classList.remove('nav-scrolled');
-            }
-            lastScrollY = scrollY;
-        });
-
-        // === Scrollspy — active nav highlight ===
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-link[data-nav]');
-
-        function updateActiveNav() {
-            let current = '';
-            sections.forEach(function(section) {
-                const sectionTop = section.offsetTop - 120;
-                if (window.scrollY >= sectionTop) {
-                    current = section.getAttribute('id');
-                }
-            });
-            navLinks.forEach(function(link) {
-                link.classList.remove('active');
-                if (link.dataset.nav === current) {
-                    link.classList.add('active');
-                }
-            });
-        }
-        window.addEventListener('scroll', updateActiveNav);
-
-        // === Scroll reveal animations ===
-        const revealObserver = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
-        document.querySelectorAll('.reveal, .step-reveal').forEach(function(el) {
-            revealObserver.observe(el);
-        });
-
-        // === Hero word animation (staggered fade-in on load) ===
-        const heroWords = document.querySelectorAll('.hero-word');
-        heroWords.forEach(function(word, index) {
-            setTimeout(function() {
-                word.classList.add('animate');
-            }, 200 + (index * 180));
-        });
-
-        // === Counter animation ===
-        const counterObserver = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                    const el = entry.target;
-                    const target = parseInt(el.dataset.target, 10);
-                    const suffix = el.dataset.suffix || '';
-                    let start = 0;
-                    const duration = 1800;
-                    const startTime = performance.now();
-
-                    function easeOut(t) {
-                        return 1 - Math.pow(1 - t, 3);
-                    }
-
-                    function animateCounter(now) {
-                        const elapsed = now - startTime;
-                        const progress = Math.min(elapsed / duration, 1);
-                        const easedProgress = easeOut(progress);
-                        const current = Math.round(easedProgress * target);
-                        el.textContent = current + suffix;
-                        if (progress < 1) {
-                            requestAnimationFrame(animateCounter);
-                        }
-                    }
-
-                    requestAnimationFrame(animateCounter);
-                    counterObserver.unobserve(el);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        document.querySelectorAll('.counter-num[data-target]').forEach(function(el) {
-            counterObserver.observe(el);
-        });
-
-        // === Contact form submission ===
-        const contactForm = document.getElementById('contact-form-r4t9');
-        const formSuccess = document.getElementById('form-success-m5k2');
-
-        if (contactForm && formSuccess) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                contactForm.style.display = 'none';
-                formSuccess.classList.remove('hidden');
-                formSuccess.classList.add('flex');
-                // Re-render icons in success message
-                if (typeof lucide !== "undefined" && typeof lucide.createIcons === "function") {
-                    lucide.createIcons();
-                }
-            });
-        }
-    </script>
 </body>
 </html>
